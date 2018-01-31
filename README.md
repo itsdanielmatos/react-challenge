@@ -8,8 +8,8 @@ Your job is to fix and improve this search engine.
 You just need to clone this repo and start working on it.
 After you've finish, just send us your repo so we can evaluate.
 
-This Challenge was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
-check the readme for more information in how to run it.
+This Challenge was bootstrapped with Create React App.
+check this [README](https://github.com/CrowdProcess/react-challenge/blob/master/CreateReactApp.md) for more information in how to run it.
 
 #### TODO
 
