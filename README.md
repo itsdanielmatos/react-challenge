@@ -1,6 +1,6 @@
 Welcome to James Front-end Challenge
 
-This challenge serves to evaluate your level of proficiency in React framework and your capacity to solve a day-to-day problem.
+This challenge serves to evaluate your level of proficiency in React and your capacity to solve a day-to-day problem.
 
 In this app you will find a **non working** search engine.
 Your job is to **fix it** and **improve it**.
