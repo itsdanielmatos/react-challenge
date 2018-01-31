@@ -1,15 +1,15 @@
 Welcome to James Front-end Challenge
 
-This challenge serves to evaluate you level of proficiency on React framework as well as your capacity to solve a day to day problem.
+This challenge serves to evaluate your level of proficiency in React framework and your capacity to solve a day-to-day problem.
 
-In this app you will find a non working search engine.
-Your job is to fix and improve this search engine.
+In this app you will find a **non working** search engine.
+Your job is to **fix it** and **improve it**.
 
 You just need to clone this repo and start working on it.
-After you've finish, just send us your repo so we can evaluate.
+After you've finish, just send us the link of your repo by email so we can evaluate.
 
 This Challenge was bootstrapped with Create React App.
-check this [README](https://github.com/CrowdProcess/react-challenge/blob/master/CreateReactApp.md) for more information in how to run it.
+Check this [README](https://github.com/CrowdProcess/react-challenge/blob/master/CreateReactApp.md) for more information in how to run the project and tests.
 
 #### TODO
 
