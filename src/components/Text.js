@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
 
-const Text = ({ children }) => <li>{children}</li>
+import './Text.css'
+
+const Text = ({ children }) => <li className="Text">{children}</li>
 
 Text.propTypes = {
    children: PropTypes.string
