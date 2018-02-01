@@ -13,8 +13,18 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      searchValue: ''
+      searchValue: '',
+      words: []
     }
+  }
+
+  componentDidMount() {
+    this.list.then((words) => {
+      this.setState({words: words})
+    }).catch((error) => {
+      console.warn("Errors while fetching words");
+      console.warn(error);
+    })
   }
 
   /* auto biding */
@@ -24,12 +34,17 @@ class App extends Component {
   }
 
   get list(){
-    return [
-      {id: 0, text: 'react'},
-      {id: 1, text: 'css'},
-      {id: 2, text: 'html'},
-      {id: 3, text: 'fetch'},
-    ]
+    return new Promise((resolve, reject) => {
+      fetch("https://api.datamuse.com/words?ml=programming&max=25")
+      .then(response => response.json())
+      .then(json => {
+        var words = json.map((word, index) => {
+          return {id: index, text: word.word}
+        })
+        words.sort((a, b) => a.text.localeCompare(b.text))
+        resolve(words);
+      }).catch((error) => reject(error))
+    })
   }
 
   render() {
@@ -37,8 +52,8 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Search searchValue={searchValue} onChange={this.onChange} />
-        <SelectedList searchValue={searchValue} list={this.list} />
+        <Search searchValue={searchValue} onChange={this.onChange} disabled={this.state.words.length === 0} />
+        <SelectedList searchValue={searchValue} list={this.state.words} />
       </div>
     );
   }

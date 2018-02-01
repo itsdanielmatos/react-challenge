@@ -13,9 +13,7 @@ function filterText(searchValue) {
 function SelectedList({ searchValue, list }) {
   return (
     <ul className="SelectedList">
-      {list
-        .filter(filterText(searchValue))
-        .map(renderText)}
+      {list.length !== 0 ? list.filter(filterText(searchValue)).map(renderText): <Text>{"No Words Available"}</Text>}
     </ul>
   )
 }
