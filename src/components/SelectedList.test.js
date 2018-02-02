@@ -25,6 +25,17 @@ it('should render all elements in lists when searchValue is empty string', () =>
   expect(wrapperChildren.last().children().text()).toBe(list[1].text)
 })
 
+it('should render No Words Available when list is empty', () => {
+  const searchValue = ''
+  const list = []
+  const wrapper = shallow(<SelectedList searchValue={searchValue} list={list} />)
+  const wrapperChildren = wrapper.children()
+  
+  expect(wrapperChildren.length).toBe(1)
+  expect(wrapperChildren.first().type()).toBe(Text)
+  expect(wrapperChildren.first().children().text()).toBe('No Words Available')
+})
+
 it('should render css text when css is searchValue', () => {
   const searchValue = 'css'
   const list = [

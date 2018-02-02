@@ -8,9 +8,11 @@ import Text from './Text'
 it('should render text when a children is given', () => {
   const children = 'css'
   const wrapper = shallow(<Text>{children}</Text>)
+  const wrapperChildren = wrapper.children()
+  const li = wrapper.props();
 
   expect(wrapper.type()).toBe('li')
-  const wrapperChildren = wrapper.children()
+  expect(li.className).toBe('Text')
   expect(wrapperChildren.text()).toBe(children)
 })
 
