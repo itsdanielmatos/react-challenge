@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import Fuse from 'fuse.js'
 
 import {
   Search,
-  SelectedList
+  SelectedList,
+  SearchOptions
 }
 from './components'
 
@@ -14,17 +16,37 @@ class App extends Component {
     super(props)
     this.state = {
       searchValue: '',
-      words: []
+      words: [],
+      options: {
+        caseSensitive: false,
+        shouldSort: false,
+        includeScore: true,
+        threshold: 0.3,
+        tokenize: true,
+        matchAllTokens: true,
+        keys:["text"]
+      },
+      fuse: new Fuse([],{})
     }
   }
 
   componentDidMount() {
     this.list.then((words) => {
-      this.setState({words: words})
+      this.setState({
+        words: words,
+        fuse: new Fuse(words, this.state.options)
+      });
     }).catch((error) => {
       console.warn("Errors while fetching words");
       console.warn(error);
     })
+  }
+
+  handleOptions = (options) => {
+    var newOptions = Object.assign(this.state.options,options);
+    this.setState({options: newOptions,
+      fuse: new Fuse(this.state.words, newOptions)
+    });
   }
 
   /* auto biding */
@@ -52,8 +74,9 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Search searchValue={searchValue} onChange={this.onChange} disabled={this.state.words.length === 0} />
-        <SelectedList searchValue={searchValue} list={this.state.words} />
+        <Search searchValue={searchValue} onChange={this.onChange} disabled={!this.state.words.length} />
+        <SearchOptions disabled={!this.state.words.length} handleOptions={this.handleOptions}/>
+        <SelectedList searchValue={searchValue} list={this.state.words} fuse={this.state.fuse} />
       </div>
     );
   }
