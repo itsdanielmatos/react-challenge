@@ -26,7 +26,7 @@ const SelectedList = ({searchValue, list, fuse}) => {
 }
 
 SelectedList.propTypes = {
-   fuse: PropTypes.object,
+   fuse: PropTypes.object.isRequired,
    searchValue: PropTypes.string.isRequired,
    list: PropTypes.arrayOf(PropTypes.shape({
      id: PropTypes.number.isRequired,

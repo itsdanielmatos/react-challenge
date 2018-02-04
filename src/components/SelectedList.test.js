@@ -1,9 +1,20 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import expect, { createSpy } from 'expect'
+import Fuse from 'fuse.js'
 
 import Text from './Text'
 import SelectedList from './SelectedList'
+
+const options =  {
+  caseSensitive: false,
+  shouldSort: false,
+  includeScore: true,
+  threshold: 0.3,
+  tokenize: true,
+  matchAllTokens: true,
+  keys:["text"]
+}
 
 /* Testing structure */
 it('should render all elements in lists when searchValue is empty string', () => {
@@ -12,7 +23,8 @@ it('should render all elements in lists when searchValue is empty string', () =>
     {id: 0, text: 'react-native'},
     {id: 1, text: 'css'}
   ]
-  const wrapper = shallow(<SelectedList searchValue={searchValue} list={list} />)
+  const fuse = new Fuse(list,options);
+  const wrapper = shallow(<SelectedList searchValue={searchValue} list={list} fuse={fuse} />)
 
   expect(wrapper.type()).toBe('ul')
   expect(wrapper.props().className).toBe('SelectedList')
@@ -28,12 +40,13 @@ it('should render all elements in lists when searchValue is empty string', () =>
 it('should render No Words Available when list is empty', () => {
   const searchValue = ''
   const list = []
-  const wrapper = shallow(<SelectedList searchValue={searchValue} list={list} />)
+  const fuse = new Fuse(list,options);
+  const wrapper = shallow(<SelectedList searchValue={searchValue} list={list} fuse={fuse} />)
   const wrapperChildren = wrapper.children()
   
   expect(wrapperChildren.length).toBe(1)
   expect(wrapperChildren.first().type()).toBe(Text)
-  expect(wrapperChildren.first().children().text()).toBe('No Words Available')
+  expect(wrapperChildren.first().children().text()).toBe('Search Unavailable')
 })
 
 it('should render css text when css is searchValue', () => {
@@ -42,7 +55,9 @@ it('should render css text when css is searchValue', () => {
     {id: 0, text: 'react-native'},
     {id: 1, text: 'css'}
   ]
-  const wrapper = shallow(<SelectedList searchValue={searchValue} list={list} />)
+
+  const fuse = new Fuse(list,options);
+  const wrapper = shallow(<SelectedList searchValue={searchValue} list={list} fuse={fuse}/>)
 
   const wrapperChildren = wrapper.children()
   expect(wrapperChildren.length).toBe(1)
@@ -56,7 +71,8 @@ it('should render react-native text when react is searchValue', () => {
     {id: 0, text: 'react-native'},
     {id: 1, text: 'css'}
   ]
-  const wrapper = shallow(<SelectedList searchValue={searchValue} list={list} />)
+  const fuse = new Fuse(list,options);
+  const wrapper = shallow(<SelectedList searchValue={searchValue} list={list} fuse={fuse} />)
 
   const wrapperChildren = wrapper.children()
   expect(wrapperChildren.length).toBe(1)
