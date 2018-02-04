@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Fuse from 'fuse.js'
-
 import {
   Search,
   SelectedList,
   SearchOptions
 }
 from './components'
-
-import './App.css';
+import './App.css'
 
 class App extends Component {
 
@@ -24,7 +22,7 @@ class App extends Component {
         threshold: 0.3,
         tokenize: true,
         matchAllTokens: true,
-        keys:["text"]
+        keys:['text']
       },
       fuse: new Fuse([],{})
     }
@@ -37,13 +35,13 @@ class App extends Component {
         fuse: new Fuse(words, this.state.options)
       });
     }).catch((error) => {
-      console.warn("Errors while fetching words");
+      console.warn('Errors while fetching words');
       console.warn(error);
-    })
+    });
   }
 
   handleOptions = (target) => {
-    var targetOption = target.id === "match-case" ? {caseSensitive: target.checked} : {shouldSort: target.checked};
+    var targetOption = target.id === 'match-case' ? {caseSensitive: target.checked} : {shouldSort: target.checked};
     var options = Object.assign(this.state.options,targetOption);
     this.setState({options: options,
       fuse: new Fuse(this.state.words, options)
@@ -52,32 +50,30 @@ class App extends Component {
 
   /* auto biding */
   onChange = (e) => {
-    const searchValue = e.target.value
-    this.setState({ searchValue })
+    const searchValue = e.target.value;
+    this.setState({ searchValue });
   }
 
   get list(){
     return new Promise((resolve, reject) => {
-      fetch("https://api.datamuse.com/words?ml=programming&max=25")
+      fetch('https://api.datamuse.com/words?ml=programming&max=25')
       .then(response => response.json())
       .then(json => {
         var words = json.map((word, index) => {
           return {id: index, text: word.word}
-        })
-        words.sort((a, b) => a.text.localeCompare(b.text))
+        });
+        words.sort((a, b) => a.text.localeCompare(b.text));
         resolve(words);
-      }).catch((error) => reject(error))
+      }).catch((error) => reject(error));
     })
   }
 
   render() {
-    const { searchValue } = this.state
-
     return (
-      <div className="App">
-        <Search searchValue={searchValue} onChange={this.onChange} disabled={!this.state.words.length} />
+      <div className='App'>
+        <Search searchValue={this.state.searchValue} onChange={this.onChange} disabled={!this.state.words.length} />
         <SearchOptions disabled={!this.state.words.length} handleOptions={this.handleOptions}/>
-        <SelectedList searchValue={searchValue} list={this.state.words} fuse={this.state.fuse} />
+        <SelectedList searchValue={this.state.searchValue} list={this.state.words} fuse={this.state.fuse} />
       </div>
     );
   }

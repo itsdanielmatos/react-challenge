@@ -23,7 +23,7 @@ it('should render an input with value, onChange handler and disabled', () => {
 
 it('should render an input with placeholder text Search It', () => {
   const spy = createSpy()
-  const wrapper = shallow(<Search searchValue={''} onChange={spy} disabled={false} placeholder='Search It'/>)
+  const wrapper = shallow(<Search searchValue={''} onChange={spy} disabled={false} placeholder= 'Search It'/>)
   const input = wrapper.props()
 
   expect(wrapper.type()).toBe('input')
