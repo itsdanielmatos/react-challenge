@@ -9,7 +9,7 @@ const SearchOptions = ({disabled, handleOptions}) => {
     }
 
     return (
-        <div className="SearchOptions">
+        <div className={`SearchOptions ${disabled ? "Disabled" : ""}`.trim()}>
             <Option id="match-case" type="checkbox" disabled={disabled} onChange={handleOptionsChange} label="Match Case" />
             <Option id="sort" type="checkbox" disabled={disabled} onChange={handleOptionsChange} label="Sort By Percentage" />
         </div>

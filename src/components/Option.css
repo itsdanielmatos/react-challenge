@@ -1,5 +1,9 @@
 .Option {
+    display: flex;
+    align-items: center;
+}
+
+.Option input {
     margin:0;
     margin-right: 5px;
-	position: relative;
 }

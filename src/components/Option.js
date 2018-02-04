@@ -4,7 +4,7 @@ import './Option.css'
 
 
 const Option = ({id, type, disabled, onChange, label}) => {
-  return (<label htmlFor={id}><input onChange={onChange} className="Option" id={id} type={type} disabled={disabled}/>{label}</label>)
+  return (<label htmlFor={id} className="Option" ><input onChange={onChange} id={id} type={type} disabled={disabled}/>{label}</label>)
 }
 
 Option.propTypes = {
