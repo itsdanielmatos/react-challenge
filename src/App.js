@@ -42,10 +42,11 @@ class App extends Component {
     })
   }
 
-  handleOptions = (options) => {
-    var newOptions = Object.assign(this.state.options,options);
-    this.setState({options: newOptions,
-      fuse: new Fuse(this.state.words, newOptions)
+  handleOptions = (target) => {
+    var targetOption = target.id === "match-case" ? {caseSensitive: target.checked} : {shouldSort: target.checked};
+    var options = Object.assign(this.state.options,targetOption);
+    this.setState({options: options,
+      fuse: new Fuse(this.state.words, options)
     });
   }
 

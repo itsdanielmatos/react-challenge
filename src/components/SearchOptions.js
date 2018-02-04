@@ -5,8 +5,7 @@ import Option from './Option.js';
  
 const SearchOptions = ({disabled, handleOptions}) => {
     const handleOptionsChange = (event) => {
-        var isChecked = event.target.checked;
-        handleOptions(event.target.id === "match-case" ? {caseSensitive: isChecked} : {shouldSort: isChecked}) ;
+        handleOptions(event.target);
     }
 
     return (
